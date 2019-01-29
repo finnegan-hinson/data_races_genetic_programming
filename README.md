@@ -1,2 +1,2 @@
-# death_racex86
+# Death Race x86
 Our stupid, stupid project.
