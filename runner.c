@@ -10,6 +10,7 @@
 #include <semaphore.h>
 
 #include "population.h"
+#include "client.h"
 
 #define NUM_THREADS 7
 
@@ -172,6 +173,10 @@ int main(int argc, char *argv[])
         printf("%d", points[x]);
     }
     printf("]\n");
+    
+    printf("Sending Results to Server.\n");
+    
+    sendPoints(points, sizeof(points));
 
     printf("Made it to clean up.\n");
     

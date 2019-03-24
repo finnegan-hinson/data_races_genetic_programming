@@ -3,6 +3,9 @@ package overseer;
 import java.io.IOException;
 import java.util.Arrays;
 
+import incubator.GenomeWriter;
+import incubator.Incubator;
+import incubator.Population;
 import server.Server;
 
 public class Overseer
@@ -11,7 +14,7 @@ public class Overseer
   private static int port;
   private static String runString;
   
-  private static final String RUN = "./run";
+  private static final String RUN = "./runner";
   private static final String CLUSTER_RUN = "srun ./runner";
 
   /**
@@ -52,15 +55,35 @@ public class Overseer
     {
       runString = CLUSTER_RUN;
     }
+    
+    Population population = new Population(7);
+    
+    String homeDirectory = System.getProperty("user.dir");
+    
     for(int x = 0; x < itt; x++)
     {
-      makeAndRunIDE();
+          
+      GenomeWriter writer = new GenomeWriter(population, homeDirectory + "/base_population.h",
+                                              homeDirectory + "/population.h", "// Insert");
+      
+      try
+      {
+        writer.writePopulation();
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+      
+      makeAndRun();
       points = server.recvPoints();
       
       //TODO Remove debug statement.
       System.out.println(Arrays.toString(points));
       
-      //TODO Reproduction and Mutation
+      population.determineFitness(points);
+      
+      Incubator.nextGeneration(population);
     }
   }
   
