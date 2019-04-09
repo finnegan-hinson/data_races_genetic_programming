@@ -6,6 +6,7 @@ import java.util.Arrays;
 import incubator.GenomeWriter;
 import incubator.Incubator;
 import incubator.Population;
+import server.Message;
 import server.Server;
 
 public class Overseer
@@ -28,6 +29,8 @@ public class Overseer
     int itt;
     
     int[] points;
+    
+    Message msg;
     
     Server server = null;
     
@@ -76,10 +79,12 @@ public class Overseer
       }
       
       makeAndRun();
-      points = server.recvPoints();
+      msg = server.recvMessage();
+      points = msg.getPoints();
       
       //TODO Remove debug statement.
-      System.out.println(Arrays.toString(points));
+      //System.out.println("Time: " + msg.getRuntime() + Arrays.toString(points));
+      System.out.println(msg.getRuntime());
       
       population.determineFitness(points);
       
