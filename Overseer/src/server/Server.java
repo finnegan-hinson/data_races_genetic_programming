@@ -24,8 +24,9 @@ public class Server
     server = null;
   }
 
-  public int[] recvPoints()
+  public Message recvMessage()
   {
+    
     try
     {
       socket.receive(packet);
@@ -36,7 +37,7 @@ public class Server
       e.printStackTrace();
     }
 
-    return bytesToInts(packet.getData(), 7);
+    return new Message(getPoints(packet.getData(), 7), getTime(packet.getData()));
   }
 
   public static Server initServer()
@@ -78,14 +79,33 @@ public class Server
    * @param size
    * @return
    */
-  private int[] bytesToInts(byte[] in, int size)
+  private int getTime(byte[] in)
+  {
+    ByteBuffer byteBuffer = ByteBuffer.wrap(in);
+    
+    byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+    
+    byteBuffer.getInt(); //Skip past elements header.
+
+    return byteBuffer.getInt();
+  }
+  
+  /**
+   * NOTE: This function assumes little endian.
+   * 
+   * @param in
+   * @param size
+   * @return
+   */
+  private int[] getPoints(byte[] in, int size)
   {
     ByteBuffer byteBuffer = ByteBuffer.wrap(in);
     int[] retInts = new int[size];
     
     byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
     
-    byteBuffer.getInt();
+    byteBuffer.getInt(); //Skip past elements header
+    byteBuffer.getInt(); //Skip past time.
 
     for (int x = 0; x < size; x++)
     {
@@ -94,4 +114,5 @@ public class Server
 
     return retInts;
   }
+  
 }

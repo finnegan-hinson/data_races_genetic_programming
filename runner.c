@@ -34,6 +34,8 @@ long** all_answers;
 
 int* points;
 
+int time_elapsed;
+
 void *run_program(void *thread_number)
 {
     int thread_num = *((int*)thread_number);
@@ -50,6 +52,7 @@ void *run_program(void *thread_number)
 
 int main(int argc, char *argv[])
 {
+    
     int primes[16];
     primes[0] = PRIME_1;
     primes[1] = PRIME_2;
@@ -100,6 +103,10 @@ int main(int argc, char *argv[])
 
     sem_init(&id_sem, 0, 0);
     
+    struct timespec start, stop;
+    
+    clock_gettime(CLOCK_BOOTTIME, &start);
+    
     for (int i = 0; i < NUM_THREADS; i++) {
         int id = i + 1;
         pthread_create(&threads[i], NULL, run_program, (void *) &id);
@@ -115,6 +122,10 @@ int main(int argc, char *argv[])
     for (int j = 0; j < NUM_THREADS; j++) {
         pthread_join(threads[j], NULL);
     }
+    
+    clock_gettime(CLOCK_BOOTTIME, &stop);
+    
+    time_elapsed = (int) 1000 * (stop.tv_sec - start.tv_sec) + (stop.tv_nsec - start.tv_nsec) / 1000;
     
     printf("**EXPECTED ANSWERS**\n[");
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -176,7 +187,7 @@ int main(int argc, char *argv[])
     
     printf("Sending Results to Server.\n");
     
-    sendPoints(points, sizeof(points));
+    sendPoints(points, sizeof(points), time_elapsed);
 
     printf("Made it to clean up.\n");
     

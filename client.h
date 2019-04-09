@@ -11,23 +11,25 @@
 
 struct sendmsg_t
 {
-    char size;
-    char padding[3];
+    int size;
+    int time; //In ms.
     int points[24];
 };
 
-void sendPoints(int* points, char elements)
+void sendPoints(int* points, char elements, int time)
 {
     struct sendmsg_t toSend;
     
     //Zero out toSend
     memset(&toSend, 0, 25);
-    toSend.size = elements;
+    toSend.size = (int) elements;
     
     for(int x = 0; x < elements; x++)
     {
         toSend.points[x] = points[x];
     }
+    
+    toSend.time = time;
     
     //Actually send the stuff
     

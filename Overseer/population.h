@@ -136,17 +136,17 @@ void orbital_period4(double* inputs, long* answers, long** all_answers)
         int* results = (int *) malloc(sizeof(int) * 20);
         free(results);
 
-        int count = 0;
+        count = 0;
           for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
               count += i + j;
             }
           }
-      int count = 0;
+      count = 0;
         for (int i = 0; i < 100; i++) {
             count += i;
          }
-        double count = 0;
+        count = 0;
         count = 2.000001 * 20000000000;
 
 		
@@ -198,20 +198,20 @@ void orbital_period6(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-        int count = 0;
+        count = 0;
           for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
               count += i + j;
             }
           }
-      int count = 0;
+      count = 0;
         for (int i = 0; i < 100; i++) {
             count += i;
          }
-        double count = 0;
+        count = 0;
         count = 2.000001 * 20000000000;
 
-      double count = 0;
+      count = 0;
       count = 2.000001 / 20000000000;
 
     }
