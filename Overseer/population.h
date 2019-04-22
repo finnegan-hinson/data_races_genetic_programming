@@ -137,8 +137,8 @@ void orbital_period4(double* inputs, long* answers, long** all_answers)
         free(results);
 
         count = 0;
-          for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
+          for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
               count += i + j;
             }
           }
@@ -199,8 +199,8 @@ void orbital_period6(double* inputs, long* answers, long** all_answers)
         to_root = a / EARTH_SPG;
         
         count = 0;
-          for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
+          for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
               count += i + j;
             }
           }

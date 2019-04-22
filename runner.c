@@ -12,8 +12,6 @@
 #include "population.h"
 #include "client.h"
 
-#define NUM_THREADS 7
-
 /*
 
  Runs the generated C code, testing to see who "wins"
@@ -84,17 +82,13 @@ int main(int argc, char *argv[])
         all_answers[x] = malloc(sizeof(long)* INPUT_SIZE);
     }
 
-
-    inputs[0] = 250000l*1000;
-    inputs[1] = 500000l*1000;
-    inputs[2] = 1000000l*1000;
-    inputs[3] = 1500000l*1000;
-    inputs[4] = 2000000l*1000;
-    inputs[5] = 2500000l*1000;
-    inputs[6] = 3000000l*1000;
-    inputs[7] = 3500000l*1000;
-    inputs[8] = 4000000l*1000;
-    inputs[9] = 4500000l*1000;
+    //Seed the random number generator.
+    srand(time(0));
+    
+    for(int x = 0; x < INPUT_SIZE; x++)
+    {
+        inputs[x] = (double)rand()/RAND_MAX*13500000.0 + 50000000.0;
+    }
     
     //Get answer key
     orbital_period_cannon(inputs, expected);
@@ -184,6 +178,7 @@ int main(int argc, char *argv[])
         printf("%d", points[x]);
     }
     printf("]\n");
+    
     
     printf("Sending Results to Server.\n");
     

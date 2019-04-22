@@ -14,6 +14,7 @@ public class Server
   // Singleton
   private static Server server;
   private static final int DEFUALT_PORT = 6559;
+  private static final int TIMEOUT = 5000; //5 sec
   private DatagramSocket socket;
   private DatagramPacket packet;
   private byte[] recvBuffer;
@@ -24,12 +25,16 @@ public class Server
     server = null;
   }
 
-  public Message recvMessage()
+  public Message recvMessage() throws SocketTimeoutException
   {
     
     try
     {
       socket.receive(packet);
+    }
+    catch(SocketTimeoutException e)
+    {
+      throw e;
     }
     catch (IOException e)
     {
@@ -61,7 +66,7 @@ public class Server
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
+    
     return server;
   }
 
@@ -69,6 +74,7 @@ public class Server
   {
     recvBuffer = new byte[124];
     socket = new DatagramSocket(port);
+    socket.setSoTimeout(TIMEOUT);
     packet = new DatagramPacket(recvBuffer, recvBuffer.length);
   }
 
