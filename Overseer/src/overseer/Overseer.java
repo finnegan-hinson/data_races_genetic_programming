@@ -1,6 +1,7 @@
 package overseer;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
 
 import incubator.GenomeWriter;
@@ -79,16 +80,33 @@ public class Overseer
       }
       
       makeAndRun();
-      msg = server.recvMessage();
-      points = msg.getPoints();
+      msg = null;
       
-      //TODO Remove debug statement.
-      //System.out.println("Time: " + msg.getRuntime() + Arrays.toString(points));
-      System.out.println(msg.getRuntime());
+      try 
+      {
+        msg = server.recvMessage();
+      }
+      catch(SocketTimeoutException e)
+      {
+        x--;
+      }
+      if(msg != null)
+      {
+        points = msg.getPoints();
       
-      population.determineFitness(points);
-      
-      Incubator.nextGeneration(population);
+        //TODO Remove debug statement.
+        System.out.println("***Itteration " + x+"***");
+        System.out.println("Points: \t\t\t" + Arrays.toString(points));
+        System.out.println("Total Execution Time(ms):\t" + msg.getRuntime());
+        
+        population.determineFitness(points);
+        
+        Incubator.nextGeneration(population);
+      }
+      else
+      {
+        System.err.println("Packet dropped. Redoing competition");
+      }
     }
   }
   

@@ -31,14 +31,14 @@ public enum Snippet
   SEVEN("        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;\n" +
         "        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));\n", 7),
   
-  EIGHT("        sleep(1);\n", 8),
+  EIGHT("        count = rand();\n", 8),
   
   NINE("        int* results = (int *) malloc(sizeof(int) * 20);\n" + 
        "        free(results);\n", 9),
   
   TEN("        count = 0;\n" + 
-      "          for (int i = 0; i < 100; i++) {\n" + 
-      "            for (int j = 0; j < 100; j++) {\n" + 
+      "          for (int i = 0; i < 10; i++) {\n" + 
+      "            for (int j = 0; j < 10; j++) {\n" + 
       "              count += i + j;\n" + 
       "            }\n" + 
       "          }", 10),
@@ -57,7 +57,7 @@ public enum Snippet
   FOURTEEN("      count = 0;\n" + 
            "      count = 2.000001 * 20000000000 / 15.00000 % 7.1234;\n", 14),
   
-  FIFTEEN("       sleep(2);\n", 15),
+  FIFTEEN("       count += 17;\n", 15),
   
   DEFAULT("       // nothing ", -1);
   
@@ -99,6 +99,7 @@ public enum Snippet
    * @return the number of snips, excluding the default
    */
   public static int getNumberOfSnippets() {
-    return 15;
+    
+    return Snippet.values().length-1;
   }
 }

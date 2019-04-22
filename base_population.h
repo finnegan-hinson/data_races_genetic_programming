@@ -1,6 +1,7 @@
 #define EARTH_SPG 398600441800000
 
-#define INPUT_SIZE 10
+#define INPUT_SIZE 1000
+#define NUM_THREADS 7
 
 #include <stdbool.h>
 #include <stdio.h>
