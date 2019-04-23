@@ -2,8 +2,10 @@ package overseer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
+import incubator.Genome;
 import incubator.GenomeWriter;
 import incubator.Incubator;
 import incubator.Population;
@@ -15,12 +17,12 @@ public class Overseer
   private static boolean cluster;
   private static int port;
   private static String runString;
-  
+  private static ArrayList<Genome> genomes; 
   private static final String RUN = "./runner";
   private static final String CLUSTER_RUN = "srun ./runner";
 
   /**
-   * Accepts two arguments, the number of itterations and any second argument denoting that the
+   * Accepts two arguments, the number of iterations and any second argument denoting that the
    * program is running on the JMU cluster.
    * 
    * @param args
@@ -34,6 +36,8 @@ public class Overseer
     Message msg;
     
     Server server = null;
+    
+    genomes = new ArrayList<Genome>();
     
     if(args.length > 2 || args.length < 1)
     {
@@ -52,9 +56,7 @@ public class Overseer
     runString = RUN;
     
     server = Server.initServer();
-    
-    //TODO Inital population creation.
-    
+        
     if(args.length == 3)
     {
       runString = CLUSTER_RUN;
@@ -66,7 +68,7 @@ public class Overseer
     
     for(int x = 0; x < itt; x++)
     {
-          
+      genomes.addAll(population.getGenomes());
       GenomeWriter writer = new GenomeWriter(population, homeDirectory + "/base_population.h",
                                               homeDirectory + "/population.h", "// Insert");
       

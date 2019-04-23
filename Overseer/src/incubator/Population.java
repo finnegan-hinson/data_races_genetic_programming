@@ -1,5 +1,6 @@
 package incubator;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ public class Population
       genomes.add(new Genome((i * i + 0) % Snippet.getNumberOfSnippets(), 
                              (i * i + 1) % Snippet.getNumberOfSnippets(),
                              (i * i + 2) % Snippet.getNumberOfSnippets(),
-                             (i * i + 3) % Snippet.getNumberOfSnippets()));
+                             (i * i + 3) % Snippet.getNumberOfSnippets(), null, null));
     }
     
   }
@@ -49,12 +50,8 @@ public class Population
     
     this.genomes = genomes;
   }
+
   
-  /**
-   * TODO 
-   * 
-   * @return
-   */
   public Genome getFittest() 
   {
     return genomes.get(this.fittest);
@@ -148,6 +145,11 @@ public class Population
     }
     
     return genomes.get(number - 1);
+  }
+  
+  public Collection<Genome> getGenomes() 
+  {
+	  return this.genomes;
   }
   
   public Genome getRandomGenome() 
