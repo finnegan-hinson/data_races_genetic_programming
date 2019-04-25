@@ -94,7 +94,7 @@ public class Incubator {
 		// 1 - 4, the snippet to be changed
 		int snippetToMutate = random.nextInt(4) + 1;
 		// A random Snippet from the list is chosen, with 0 representing nothing
-		int randomSnippet = random.nextInt(Snippet.getNumberOfSnippets());
+		int randomSnippet = Snippet.getRandomSnippetNumber();
 
 		int first, second, third, fourth;
 
