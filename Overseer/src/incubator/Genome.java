@@ -24,13 +24,13 @@ public class Genome {
 		third = three;
 		fourth = four;
 		
-		if (father.equals(null)) {
+		if (father == null) {
 			parentID[0] = -1;
 		} else {
 			parentID[0] = father.getID();
 		}
 
-		if (mother.equals(null)) {
+		if (mother ==null) {
 			parentID[1] = -1;
 		} else {
 			parentID[1] = mother.getID();
