@@ -15,7 +15,7 @@ public class Incubator
   Genome secondFittest;
   int generation = 0;
   static final double MUTATION_RATE = 0.02;
-  
+  static int id;
   
   private static Genome[] crossover(Genome first, Genome second) {
     Genome[] recombined = new Genome[2];
@@ -27,21 +27,21 @@ public class Incubator
     {
       case 1:
         recombined[0] = new Genome(first.getFirst(), second.getSecond(), 
-            second.getThird(), second.getFourth());
+            second.getThird(), second.getFourth(), first, second);
         recombined[1] = new Genome(second.getFirst(), first.getSecond(), 
-            first.getThird(), first.getFourth());
+            first.getThird(), first.getFourth(), first, second);
         break;
       case 2:
         recombined[0] = new Genome(first.getFirst(), first.getSecond(), 
-            second.getThird(), second.getFourth());
+            second.getThird(), second.getFourth(), first, second);
         recombined[1] = new Genome(second.getFirst(), second.getSecond(), 
-            first.getThird(), first.getFourth());
+            first.getThird(), first.getFourth(), first, second);
         break;
       case 3:
         recombined[0] = new Genome(first.getFirst(), first.getSecond(), 
-            first.getThird(), second.getFourth());
+            first.getThird(), second.getFourth(), first, second);
         recombined[1] = new Genome(second.getFirst(), second.getSecond(), 
-            second.getThird(), first.getFourth());
+            second.getThird(), first.getFourth(), first, second);
         break;
       
     }
@@ -89,12 +89,13 @@ public class Incubator
         break;
     }
     
-    return new Genome(first, second, third, fourth);
+    return new Genome(first, second, third, fourth, toMutate, toMutate);
     
   }
   
   public static void nextGeneration(Population population) 
   {
+	  
     ArrayList<Genome> nextGeneration = new ArrayList<Genome>();
     Random random = new Random();
     
@@ -123,43 +124,6 @@ public class Incubator
     
     population.clearFitness();
     population.setNextPopulation(nextGeneration);
-    
-  }
-  
-  public static void main(String[] args) {
-    Population population = new Population(7);
-    
-    String homeDirectory = System.getProperty("user.dir");
-    
-    System.out.println(homeDirectory);
-        
-    GenomeWriter writer = new GenomeWriter(population, homeDirectory + "\\base_population.h",
-                                            homeDirectory + "\\population.h", "// Insert");    
-    
-    try
-    {
-      writer.writePopulation();
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-    
-    
-    // Execute C code here
-    
-    
-    // Get fitness array here
-    int[] fitnessNumbers = new int[7];
-    
-    population.determineFitness(fitnessNumbers);
-    
-    // After this is done determine a new population
-    nextGeneration(population);
-    
-    // And do it again if need be!
-    
-    
     
   }
 
