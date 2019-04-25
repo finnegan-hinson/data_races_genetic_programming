@@ -13,7 +13,7 @@ struct sendmsg_t
 {
     int size;
     int time; //In ms.
-    int points[24];
+    int points[32];
 };
 
 void sendPoints(int* points, char elements, int time)

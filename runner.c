@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <semaphore.h>
+#include <mpi.h>
 
 #include "population.h"
 #include "client.h"
@@ -34,6 +35,8 @@ int* points;
 
 int time_elapsed;
 
+int my_rank;
+
 void *run_program(void *thread_number)
 {
     int thread_num = *((int*)thread_number);
@@ -51,22 +54,36 @@ void *run_program(void *thread_number)
 int main(int argc, char *argv[])
 {
     
-    int primes[16];
-    primes[0] = PRIME_1;
-    primes[1] = PRIME_2;
-    primes[2] = PRIME_3;
-    primes[3] = PRIME_4;
-    primes[4] = PRIME_5;
-    primes[5] = PRIME_6;
-    primes[6] = PRIME_7;
-    primes[7] = PRIME_8;
-    primes[8] = PRIME_9;
-    primes[9] = PRIME_10;
+    int primes[28];
+    primes[0 ] = PRIME_1;
+    primes[1 ] = PRIME_2;
+    primes[2 ] = PRIME_3;
+    primes[3 ] = PRIME_4;
+    primes[4 ] = PRIME_5;
+    primes[5 ] = PRIME_6;
+    primes[6 ] = PRIME_7;
+    primes[7 ] = PRIME_8;
+    primes[8 ] = PRIME_9;
+    primes[9 ] = PRIME_10;
     primes[10] = PRIME_11;
     primes[11] = PRIME_12;
     primes[12] = PRIME_13;
     primes[13] = PRIME_14;
-    primes[14] = PRIME_15;
+    primes[15] = PRIME_15;
+    primes[16] = PRIME_16;
+    primes[17] = PRIME_17;
+    primes[18] = PRIME_18;
+    primes[19] = PRIME_19;
+    primes[20] = PRIME_20;
+    primes[21] = PRIME_21;
+    primes[22] = PRIME_22;
+    primes[23] = PRIME_23;
+    primes[24] = PRIME_24;
+    primes[25] = PRIME_25;
+    primes[26] = PRIME_26;
+    primes[27] = PRIME_27;
+    primes[28] = PRIME_28;
+    
     
     
     inputs = (double *) malloc(sizeof(double) * INPUT_SIZE);
@@ -92,6 +109,9 @@ int main(int argc, char *argv[])
     
     //Get answer key
     orbital_period_cannon(inputs, expected);
+    
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
     pthread_t* threads = (pthread_t *) malloc(NUM_THREADS * sizeof(pthread_t));
 
@@ -102,7 +122,7 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_BOOTTIME, &start);
     
     for (int i = 0; i < NUM_THREADS; i++) {
-        int id = i + 1;
+        int id = i + (my_rank * NUM_THREADS) + 1;
         pthread_create(&threads[i], NULL, run_program, (void *) &id);
         sem_wait(&id_sem);
     }
@@ -179,10 +199,18 @@ int main(int argc, char *argv[])
     }
     printf("]\n");
     
+    int points_all[NUM_THREADS * NODES];
     
-    printf("Sending Results to Server.\n");
+    MPI_Gather(&points, NUM_THREADS, MPI_INT, 
+        &points_all, NODES, MPI_INT, 0, MPI_COMM_WORLD);
     
-    sendPoints(points, sizeof(points), time_elapsed);
+    if(my_rank == 0)
+    {
+        printf("Sending Results to Server.\n");
+        time_elapsed = (int) 1000 * (stop.tv_sec - start.tv_sec) + (stop.tv_nsec - start.tv_nsec) / 1000;
+    
+        sendPoints(points_all, sizeof(points_all)/4, time_elapsed);
+    }
 
     printf("Made it to clean up.\n");
     
