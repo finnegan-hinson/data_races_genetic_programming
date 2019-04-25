@@ -20,9 +20,12 @@ public class Overseer {
 
 	private static final String RUN = "./runner";
 	private static final String CLUSTER_RUN = "srun ./runner";
+	
+	// Master switch for the population size, change here
+	private static final int populationSize = 28;
 
 	/**
-	 * Accepts two arguments, the number of itterations and any second argument
+	 * Accepts two arguments, the number of iterations and any second argument
 	 * denoting that the program is running on the JMU cluster.
 	 * 
 	 * @param args
@@ -57,7 +60,7 @@ public class Overseer {
 			runString = CLUSTER_RUN;
 		}
 
-		Population population = new Population(7);
+		Population population = new Population(populationSize);
 
 		String homeDirectory = System.getProperty("user.dir");
 
