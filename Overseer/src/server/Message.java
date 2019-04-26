@@ -1,5 +1,11 @@
 package server;
 
+/**
+ * A class that wraps around the datagrams received from the server. Hold both time and point value information.
+ * 
+ * @author Sean Dwyer
+ *
+ */
 public class Message
 {
   private int[] points;
@@ -7,6 +13,8 @@ public class Message
   
   
   /**
+   * Get the point values from the message.
+   * 
    * @return the points
    */
   public int[] getPoints()
@@ -14,6 +22,8 @@ public class Message
     return points;
   }
   /**
+   * Set the point values.
+   * 
    * @param points the points to set
    */
   public void setPoints(int[] points)
@@ -21,6 +31,8 @@ public class Message
     this.points = points;
   }
   /**
+   * Get the ammount of time from the compitiion
+   * 
    * @return the runtime
    */
   public int getRuntime()
@@ -34,9 +46,12 @@ public class Message
   {
     this.runtime = runtime;
   }
+  
   /**
-   * @param points
-   * @param runtime
+   * Explicit value constructor. takes an array of integer and a single integer.
+   * 
+   * @param points - The point values for each thread.
+   * @param runtime - The runtime for the competition as a whole.
    */
   public Message(int[] points, int runtime)
   {
@@ -44,6 +59,5 @@ public class Message
     this.points = points;
     this.runtime = runtime;
   }
-  
   
 }
