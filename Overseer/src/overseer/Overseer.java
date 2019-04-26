@@ -113,9 +113,7 @@ public class Overseer
       {
         points = msg.getPoints();
 
-        System.out.println("***Itteration " + x + "***");
-        System.out.println("Points: \t\t\t" + Arrays.toString(points));
-        System.out.println("Total Execution Time(ms):\t" + msg.getRuntime());
+        System.out.println("Itteration[" + x + "] Execution Time(ms):\t" + msg.getRuntime());
         
         // Determine the fitness of the population run
         population.determineFitness(points);
