@@ -57,7 +57,54 @@ public enum Snippet {
 
   private String snippet;
   private Integer number;
+<<<<<<< HEAD
+=======
 
+  private Snippet(String snippet, int number) {
+    this.snippet = snippet;
+    this.number = number;
+
+  }
+
+  public static String getSnippet(int number) {
+    switch (number) {
+    case 1:
+      return ONE.snippet;
+    case 2:
+      return TWO.snippet;
+    case 3:
+      return THREE.snippet;
+    case 4:
+      return FOUR.snippet;
+    case 5:
+      return FIVE.snippet;
+    case 6:
+      return SIX.snippet;
+    case 7:
+      return SEVEN.snippet;
+    case 8:
+      return EIGHT.snippet;
+    case 9:
+      return NINE.snippet;
+    case 10:
+      return TEN.snippet;
+    case 11:
+      return ELEVEN.snippet;
+    case 12:
+      return TWELVE.snippet;
+    case 13:
+      return THIRTEEN.snippet;
+    case 14:
+      return FOURTEEN.snippet;
+    case 15:
+      return FIFTEEN.snippet;
+    default:
+      return DEFAULT.snippet;
+    }
+  }
+>>>>>>> refs/remotes/origin/multi-node
+
+<<<<<<< HEAD
 	/**
 	 * Private constructor for Snippets
 	 * 
@@ -67,9 +114,22 @@ public enum Snippet {
   private Snippet(String snippet, int number) {
     this.snippet = snippet;
     this.number = number;
+=======
+  /**
+   * Excludes the default (-1) snippet which holds no information.
+   * 
+   * @return the number of snips, excluding the default
+   */
+  public static int getNumberOfSnippets() {
+>>>>>>> refs/remotes/origin/multi-node
 
+<<<<<<< HEAD
+=======
+    return Snippet.values().length - 1;
+>>>>>>> refs/remotes/origin/multi-node
   }
 
+<<<<<<< HEAD
 	/**
 	 * Given the ID number, return the snippet string.
 	 * 
@@ -112,7 +172,13 @@ public enum Snippet {
       return DEFAULT.snippet;
     }
   }
+=======
+  public static int getRandomSnippetNumber() {
+    Random random = new Random();
+    return random.nextInt(Snippet.getNumberOfSnippets() + 1);
+>>>>>>> refs/remotes/origin/multi-node
 
+<<<<<<< HEAD
   /**
    * Excludes the default (-1) snippet which holds no information.
    * 
@@ -133,5 +199,7 @@ public enum Snippet {
     Random random = new Random();
     return random.nextInt(Snippet.getNumberOfSnippets() + 1);
 
+=======
+>>>>>>> refs/remotes/origin/multi-node
   }
 }

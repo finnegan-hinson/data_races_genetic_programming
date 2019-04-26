@@ -5,6 +5,8 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import overseer.Overseer;
+
 /**
  * 
  * @author Sean Dwyer
@@ -42,7 +44,7 @@ public class Server
       e.printStackTrace();
     }
 
-    return new Message(getPoints(packet.getData(), 7), getTime(packet.getData()));
+    return new Message(getPoints(packet.getData(), Overseer.POPULATION_SIZE), getTime(packet.getData()));
   }
 
   public static Server initServer()
@@ -72,7 +74,7 @@ public class Server
 
   private Server(int port) throws SocketException
   {
-    recvBuffer = new byte[124];
+    recvBuffer = new byte[1024];
     socket = new DatagramSocket(port);
     socket.setSoTimeout(TIMEOUT);
     packet = new DatagramPacket(recvBuffer, recvBuffer.length);

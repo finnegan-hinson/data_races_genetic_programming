@@ -28,10 +28,10 @@ public class Overseer {
 	private static ArrayList<Genome> genomes;
 
 	private static final String RUN = "./runner";
-	private static final String CLUSTER_RUN = "srun ./runner";
+	private static final String CLUSTER_RUN = "salloc -n 4 mpirun ./runner";
 	
 	// Master switch for the population size, change here
-	private static final int populationSize = 28;
+	public static final int POPULATION_SIZE = 28;
 
 	/**
 	 * Accepts two arguments, the number of iterations and any second argument
@@ -68,7 +68,7 @@ public class Overseer {
 			runString = CLUSTER_RUN;
 		}
 
-		Population population = new Population(populationSize);
+		Population population = new Population(POPULATION_SIZE);
 
 		String homeDirectory = System.getProperty("user.dir");
 
@@ -114,9 +114,9 @@ public class Overseer {
 	 */
 	private static void makeAndRun() {
 		try {
-			Runtime.getRuntime().exec("make clean").waitFor();
-			Runtime.getRuntime().exec("make").waitFor();
+			Runtime.getRuntime().exec("sh ./build_c.sh").waitFor();
 			Runtime.getRuntime().exec(runString);
+<<<<<<< HEAD
 		} catch (InterruptedException | IOException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -132,6 +132,9 @@ public class Overseer {
 			Runtime.getRuntime().exec("make --directory=../").waitFor();
 			Runtime.getRuntime().exec("../runner");
 		} catch (InterruptedException | IOException e) {
+=======
+		} catch (IOException | InterruptedException e) {
+>>>>>>> refs/remotes/origin/multi-node
 			e.printStackTrace();
 			System.exit(1);
 		}
