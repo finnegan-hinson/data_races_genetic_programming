@@ -35,8 +35,6 @@ public class Incubator {
 	private static Genome[] crossover(Genome first, Genome second) {
 		Genome[] recombined = new Genome[2];
 
-		Random random = new Random();
-
 		// The crossover is chosen at random instead of just the halfway point
 		int crossoverPoint = (int) Math.random() * 3 + 1; // 1 - 3
 
