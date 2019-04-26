@@ -6,6 +6,10 @@ import java.util.Random;
  * An enumeration of the available code snippets, represented as numbers 1 - n
  * in a map and accessed by a public getSnippet method.
  * 
+ * Each code snippet is a few lines of C code represented as a string. Any C
+ * code could be added here, we focused on things in the C standard library and
+ * solutions to our algorithm.
+ * 
  * @author Virginia R Hinson
  *
  */
@@ -54,12 +58,24 @@ public enum Snippet {
 	private String snippet;
 	private Integer number;
 
+	/**
+	 * Private constructor for Snippets
+	 * 
+	 * @param snippet a string representing the code of the snippet
+	 * @param number  a number ID for the snippet
+	 */
 	private Snippet(String snippet, int number) {
 		this.snippet = snippet;
 		this.number = number;
 
 	}
 
+	/**
+	 * Given the ID number, return the snippet string.
+	 * 
+	 * @param number the ID of the snippet
+	 * @return the string representation of the code snippet
+	 */
 	public static String getSnippet(int number) {
 		switch (number) {
 		case 1:
@@ -107,6 +123,12 @@ public enum Snippet {
 		return Snippet.values().length - 1;
 	}
 
+	/**
+	 * Returns a random number (between 0 and the number of snippets) representing a
+	 * code snippet.
+	 * 
+	 * @return a random number from 0 to the total snippet count
+	 */
 	public static int getRandomSnippetNumber() {
 		Random random = new Random();
 		return random.nextInt(Snippet.getNumberOfSnippets() + 1);

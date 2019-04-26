@@ -14,6 +14,7 @@ import java.util.Random;
  *
  */
 public class Population {
+
 	private int populationSize;
 	private ArrayList<Genome> genomes;
 
@@ -23,8 +24,9 @@ public class Population {
 	private int[] fitnessFigures;
 
 	/**
+	 * Parameterized constructor to create a Population of genomes.
 	 * 
-	 * @param size
+	 * @param size the overall size of the population
 	 */
 	public Population(int size) {
 		populationSize = size;
@@ -34,7 +36,7 @@ public class Population {
 	}
 
 	/**
-	 * 
+	 * Creates a populationSize set of Genome objects with random snippets.
 	 */
 	private void initializePopulation() {
 		for (int i = 0; i < populationSize; i++) {
@@ -45,8 +47,11 @@ public class Population {
 	}
 
 	/**
+	 * Sets the population to a new ArrayList of genome objects.
 	 * 
-	 * @param genomes
+	 * Throws an error if the new population is not populationSize.
+	 * 
+	 * @param genomes the new genomes for the population
 	 */
 	public void setNextPopulation(ArrayList<Genome> genomes) {
 		if (genomes.size() != this.populationSize) {
@@ -57,41 +62,67 @@ public class Population {
 	}
 
 	/**
+	 * Gets the Genome determined by determineFitness to be the fittest snippet.
 	 * 
-	 * @return
+	 * @return the fittest genome
 	 */
 	public Genome getFittest() {
 		return genomes.get(this.fittest);
 	}
 
 	/**
+	 * Gets the Genome determined by determineFitness to be the second fittest
+	 * snippet.
 	 * 
-	 * @return
+	 * @return the second fittest genome
 	 */
 	public Genome getSecondFittest() {
 		return genomes.get(this.secondFittest);
 	}
 
 	/**
+	 * Returns a number point value representing the fitness of a specific genome in
+	 * the population.
 	 * 
-	 * @param genome
-	 * @return
+	 * @param genome a genome in the population
+	 * @return the fitness of that genome
 	 */
 	public int getFitness(Genome genome) {
 		int number = genomes.indexOf(genome);
 
+		// If an invalid genome is given
+		if (number == -1) {
+			return -1;
+		}
 		return fitnessFigures[number];
 	}
 
 	/**
+	 * Returns a number point value representing the fitness of a specific genome
+	 * (by number) in the population.
 	 * 
-	 * @param genomeNumber
-	 * @return
+	 * @param genomeNumber a number representing a genome in the population
+	 * @return the fitness of that genome
 	 */
 	public int getFitness(int genomeNumber) {
-		return fitnessFigures[genomeNumber % this.populationSize];
+		if (genomeNumber < 0 || genomeNumber > this.populationSize) {
+			return -1;
+		}
+
+		return fitnessFigures[genomeNumber];
 	}
 
+	/**
+	 * This method must be run in order to determine the fitness of the population
+	 * and to accurately record the winner and runner up.
+	 * 
+	 * It takes an array of integer "points" values assigned in the c program and
+	 * copies them into the fitnessFigures array (where the index represents the
+	 * number in the population ArrayList) and sets the fittest and second fittest.
+	 * 
+	 * @param fitnessNumbers an array of integers representing the "score" of each
+	 *                       genome
+	 */
 	public void determineFitness(int[] fitnessNumbers) {
 
 		this.fitnessFigures = fitnessNumbers;
@@ -117,19 +148,30 @@ public class Population {
 
 	}
 
+	/**
+	 * Returns the fitness array to null, and sets the fittest and second fittest to
+	 * 0.
+	 */
 	public void clearFitness() {
 		this.fitnessFigures = null;
 		this.fittest = 0;
 		this.secondFittest = 0;
 	}
 
+	/**
+	 * Returns the size of the population
+	 * 
+	 * @return an integer representing population size
+	 */
 	public int getPopulationSize() {
 		return this.populationSize;
 	}
 
 	/**
+	 * Returns an array of Strings that contain the genome code for the population.
 	 * 
-	 * @return
+	 * @return an array of strings, each of which containing the snippets in each
+	 *         genome
 	 */
 	public String[] populationSnippets() {
 		String[] populationCode = new String[this.populationSize];
@@ -155,6 +197,14 @@ public class Population {
 		return genomes.get(populationNumber - 1).snippetsToInsert();
 	}
 
+	/**
+	 * Retrieves the genome in the population, represented by its identification
+	 * number in the C file (and its index in the population ArrayList).
+	 * 
+	 * @param number the identifier of the genome to be retrieved
+	 * @return the genome represented by the number given, IllegalArgumentException
+	 *         if this isn't valid
+	 */
 	public Genome getGenome(int number) {
 		if (number < 1 || number > this.populationSize) {
 			throw new IllegalArgumentException();
@@ -163,10 +213,20 @@ public class Population {
 		return genomes.get(number - 1);
 	}
 
+	/**
+	 * Returns the entire collection of Genomes.
+	 * 
+	 * @return the collection of genomes in a population
+	 */
 	public Collection<Genome> getGenomes() {
 		return this.genomes;
 	}
 
+	/**
+	 * Returns a random genome in the population.
+	 * 
+	 * @return a random genome in the population
+	 */
 	public Genome getRandomGenome() {
 		Random random = new Random();
 		int index = random.nextInt(this.getPopulationSize());

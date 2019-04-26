@@ -12,9 +12,18 @@ import incubator.Population;
 import server.Message;
 import server.Server;
 
+/**
+ * This class oversees the generation of new populations and the execution of
+ * said population's resulting c file.
+ * 
+ * In other words, it is the main delegator for the functionality of the
+ * project.
+ * 
+ * @author Virginia Hinson and Sean Dwyer
+ *
+ */
 public class Overseer {
-	private static boolean cluster;
-	private static int port;
+
 	private static String runString;
 	private static ArrayList<Genome> genomes;
 
@@ -28,17 +37,15 @@ public class Overseer {
 	 * Accepts two arguments, the number of iterations and any second argument
 	 * denoting that the program is running on the JMU cluster.
 	 * 
-	 * @param args
+	 * @param args the number of iterations and a second argument to indicate if it
+	 *             is running on the cluster
 	 */
 	public static void main(String[] args) {
-		int itt;
-
+		int iterations;
 		int[] points;
-
 		Message msg;
 
 		genomes = new ArrayList<Genome>();
-
 		Server server = null;
 
 		if (args.length > 2 || args.length < 1) {
@@ -46,16 +53,17 @@ public class Overseer {
 			return;
 		}
 		try {
-			itt = Integer.parseInt(args[0]);
+			iterations = Integer.parseInt(args[0]);
 		} catch (NumberFormatException e) {
 			System.out.println("The 1st parameter must be an integer");
 			return;
 		}
 
-		runString = RUN;
 
 		server = Server.initServer();
-
+		
+		runString = RUN;
+		// If any command line argument is given to indicate it is run on the cluster
 		if (args.length == 3) {
 			runString = CLUSTER_RUN;
 		}
@@ -64,9 +72,12 @@ public class Overseer {
 
 		String homeDirectory = System.getProperty("user.dir");
 
-		for (int x = 0; x < itt; x++) {
+		for (int x = 0; x < iterations; x++) {
+			
+			// A list of all genomes for tracking
 			genomes.addAll(population.getGenomes());
-
+			
+			// Writes the population's genome snippets to a C file
 			GenomeWriter writer = new GenomeWriter(population, homeDirectory + "/base_population.h",
 					homeDirectory + "/population.h", "// Insert");
 
@@ -79,6 +90,7 @@ public class Overseer {
 			makeAndRun();
 			msg = null;
 
+			// If the socket times out, try once more
 			try {
 				msg = server.recvMessage();
 			} catch (SocketTimeoutException e) {
@@ -86,14 +98,10 @@ public class Overseer {
 			}
 			if (msg != null) {
 				points = msg.getPoints();
-
-				// TODO Remove debug statement.
-				System.out.println("***Itteration " + x + "***");
-				System.out.println("Points: \t\t\t" + Arrays.toString(points));
-				System.out.println("Total Execution Time(ms):\t" + msg.getRuntime());
-
+				
+				// Determine the fitness of the population run
 				population.determineFitness(points);
-
+				// Using this data, generate the next generation
 				Incubator.nextGeneration(population);
 			} else {
 				System.err.println("Packet dropped. Redoing competition");
@@ -101,6 +109,9 @@ public class Overseer {
 		}
 	}
 
+	/**
+	 * Runs the makefile and the generated C program.
+	 */
 	private static void makeAndRun() {
 		try {
 			Runtime.getRuntime().exec("make clean").waitFor();
@@ -112,6 +123,9 @@ public class Overseer {
 		}
 	}
 
+	/**
+	 * Runs the makefile and the generated C program from an IDE.
+	 */
 	private static void makeAndRunIDE() {
 		try {
 			Runtime.getRuntime().exec("make --directory=../ clean").waitFor();
