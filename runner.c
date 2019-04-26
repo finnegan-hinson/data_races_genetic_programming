@@ -13,39 +13,32 @@
 #include "population.h"
 #include "client.h"
 
-/*
-
- Runs the generated C code, testing to see who "wins"
- the data race.
-
-*/
-
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-
 sem_t id_sem;
 
 double* inputs;
 
-long* expected;
-long* answers;
+long* expected; //The "answer key"
+long* answers; //The actuall answers. This is a shared resource.
 long** all_answers;
 
-int* points;
+int* points; //The points from this compitition.
+int* points_all; //The points aggregated from all compititions.
 
 int time_elapsed;
 
 int my_rank;
 
+/*
+ Runs the generated C code, testing to see who "wins"
+ the data race.
+*/
 void *run_program(void *thread_number)
 {
     int thread_num = *((int*)thread_number);
     sem_post(&id_sem);
     
-    pthread_mutex_lock(&mutex);
-    pthread_cond_wait(&cond, &mutex);
-    pthread_mutex_unlock(&mutex);
-
+    //pthread_barrier_wait(&start_barrier);
+    
     orbital_period(inputs, answers, all_answers, thread_num);
     return NULL;
 
@@ -53,6 +46,11 @@ void *run_program(void *thread_number)
 
 int main(int argc, char *argv[])
 {
+    
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    
+    printf("%d Forked\n", my_rank);
     
     int primes[28];
     primes[0 ] = PRIME_1;
@@ -69,20 +67,20 @@ int main(int argc, char *argv[])
     primes[11] = PRIME_12;
     primes[12] = PRIME_13;
     primes[13] = PRIME_14;
-    primes[15] = PRIME_15;
-    primes[16] = PRIME_16;
-    primes[17] = PRIME_17;
-    primes[18] = PRIME_18;
-    primes[19] = PRIME_19;
-    primes[20] = PRIME_20;
-    primes[21] = PRIME_21;
-    primes[22] = PRIME_22;
-    primes[23] = PRIME_23;
-    primes[24] = PRIME_24;
-    primes[25] = PRIME_25;
-    primes[26] = PRIME_26;
-    primes[27] = PRIME_27;
-    primes[28] = PRIME_28;
+    primes[14] = PRIME_15;
+    primes[15] = PRIME_16;
+    primes[16] = PRIME_17;
+    primes[17] = PRIME_18;
+    primes[18] = PRIME_19;
+    primes[19] = PRIME_20;
+    primes[20] = PRIME_21;
+    primes[21] = PRIME_22;
+    primes[22] = PRIME_23;
+    primes[23] = PRIME_24;
+    primes[24] = PRIME_25;
+    primes[25] = PRIME_26;
+    primes[26] = PRIME_27;
+    primes[27] = PRIME_28;
     
     
     
@@ -93,10 +91,28 @@ int main(int argc, char *argv[])
     all_answers = malloc(NUM_THREADS * sizeof(long*));
     
     points = malloc(NUM_THREADS * sizeof(int));
+        
+    points_all = malloc(NODES * NUM_THREADS * sizeof(int));
     
     for(int x = 0; x < NUM_THREADS; x++)
     {
         all_answers[x] = malloc(sizeof(long)* INPUT_SIZE);
+    }
+    
+    /*
+     * Zero out memory
+     */
+    for(int x = 0; x < NUM_THREADS; x++)
+    {
+        points[x] = 0;
+    }
+    
+    /*
+     * Zero out points buffer.
+     */
+    for(int x = 0; x < NUM_THREADS * NODES; x++)
+    {
+        points_all[x] = 0;
     }
 
     //Seed the random number generator.
@@ -110,8 +126,7 @@ int main(int argc, char *argv[])
     //Get answer key
     orbital_period_cannon(inputs, expected);
     
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    printf("Initalized Data \n");
 
     pthread_t* threads = (pthread_t *) malloc(NUM_THREADS * sizeof(pthread_t));
 
@@ -121,17 +136,15 @@ int main(int argc, char *argv[])
     
     clock_gettime(CLOCK_BOOTTIME, &start);
     
+    sem_init(&id_sem, 0, 0);
+    
     for (int i = 0; i < NUM_THREADS; i++) {
         int id = i + (my_rank * NUM_THREADS) + 1;
         pthread_create(&threads[i], NULL, run_program, (void *) &id);
         sem_wait(&id_sem);
     }
-
-    pthread_mutex_lock(&mutex);
-    pthread_cond_broadcast(&cond); // Go!
-    pthread_mutex_unlock(&mutex);
-
-    printf("Joining Threads\n");
+    
+    printf("%d: Joining Threads\n", my_rank);
     
     for (int j = 0; j < NUM_THREADS; j++) {
         pthread_join(threads[j], NULL);
@@ -141,17 +154,7 @@ int main(int argc, char *argv[])
     
     time_elapsed = (int) 1000 * (stop.tv_sec - start.tv_sec) + (stop.tv_nsec - start.tv_nsec) / 1000;
     
-    printf("**EXPECTED ANSWERS**\n[");
-    for(int x = 0; x < INPUT_SIZE; x++)
-    {
-        if(x != 0)
-        {
-            printf(", ");
-        }
-        printf("%ld", expected[x]);
-    }
-    printf("]\n");
-
+    
     // Mess with the results in answers/all answers
     for(int thread = 0; thread < NUM_THREADS; thread++)
     {
@@ -164,62 +167,44 @@ int main(int argc, char *argv[])
             }
             
             //Correct answer in shared array worth 50 points.
-            if(answers[x]/primes[thread] == expected[x])
+            if(answers[x]/primes[thread + (my_rank * NUM_THREADS)] == expected[x])
             {
                 points[thread] += 50;
             }
         }
     }
     
-    printf("***********\nACTUAL ANSWERS\n************\n");
-    
-    for(int x = 0; x < NUM_THREADS; x++)
-    {
-        printf("Thread: %d[", x+1);
-        for(int y = 0; y < INPUT_SIZE; y++)
-        {
-            if( y != 0)
-            {
-                printf(", ");
-            }
-            printf("%ld", all_answers[x][y]);
-        }
-        printf("]\n");
-    }
-    printf("*****************\n");
-    
-    printf("**POINTS**\n[");
-    for(int x = 0; x < NUM_THREADS; x++)
-    {
-        if(x != 0)
-        {
-            printf(", ");
-        }
-        printf("%d", points[x]);
-    }
-    printf("]\n");
-    
-    int points_all[NUM_THREADS * NODES];
-    
-    MPI_Gather(&points, NUM_THREADS, MPI_INT, 
-        &points_all, NODES, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(points, NUM_THREADS, MPI_INT, 
+        points_all, NUM_THREADS, MPI_INT, 0, MPI_COMM_WORLD);
+        
+    MPI_Barrier(MPI_COMM_WORLD);
     
     if(my_rank == 0)
     {
         printf("Sending Results to Server.\n");
         time_elapsed = (int) 1000 * (stop.tv_sec - start.tv_sec) + (stop.tv_nsec - start.tv_nsec) / 1000;
     
-        sendPoints(points_all, sizeof(points_all)/4, time_elapsed);
+        sendPoints(points_all, sizeof(points_all)/sizeof(int), time_elapsed);
+        printf("**POINTS**\n[");
+        for(int x = 0; x < NUM_THREADS * NODES; x++)
+        {
+            if(x != 0)
+            {
+                printf(", ");
+            }
+            printf("%d", points_all[x]);
+        }
+        printf("]\n");
     }
-
-    printf("Made it to clean up.\n");
     
-    pthread_mutex_destroy(&mutex);
-    pthread_cond_destroy(&cond);
+    MPI_Barrier(MPI_COMM_WORLD);
+    
+    MPI_Finalize();
 
     free(inputs);
     free(answers);
     free(expected);
+    free(points_all);
     
     for(int x = 0; x < NUM_THREADS; x++)
     {

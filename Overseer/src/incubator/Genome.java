@@ -7,7 +7,7 @@ package incubator;
  *
  */
 public class Genome {
-	
+
 	private int first;
 	private int second;
 	private int third;
@@ -18,26 +18,26 @@ public class Genome {
 
 	int[] parentID = new int[2];
 
-	public Genome(int one, int two, int three, int four,  Genome father, Genome mother) {
+	public Genome(int one, int two, int three, int four, Genome father, Genome mother) {
 		first = one;
 		second = two;
 		third = three;
 		fourth = four;
-		
+
 		if (father == null) {
 			parentID[0] = -1;
 		} else {
 			parentID[0] = father.getID();
 		}
 
-		if (mother ==null) {
+		if (mother == null) {
 			parentID[1] = -1;
 		} else {
 			parentID[1] = mother.getID();
 		}
 
 		this.id = counter++;
-		
+
 	}
 
 	public String snippetsToInsert() {
@@ -65,7 +65,7 @@ public class Genome {
 	public static int genomeSize() {
 		return 4;
 	}
-	
+
 	public int getID() {
 		return id;
 	}

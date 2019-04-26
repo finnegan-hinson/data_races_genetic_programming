@@ -51,7 +51,7 @@
  */ 
 void orbital_period1(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 1;
+	int period_num = 0 % NUM_THREADS;
 	int prime = PRIME_1;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -69,7 +69,7 @@ void orbital_period1(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period2(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 2;
+	int period_num = 1 % NUM_THREADS;
 	int prime = PRIME_2;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -88,7 +88,7 @@ void orbital_period2(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period3(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 3;
+	int period_num = 2 % NUM_THREADS;
 	int prime = PRIME_3;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -107,7 +107,7 @@ void orbital_period3(double* inputs, long* answers, long** all_answers)
  */  
 void orbital_period4(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 4;
+	int period_num = 3 % NUM_THREADS;
 	int prime = PRIME_4;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -127,7 +127,7 @@ void orbital_period4(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period5(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 5;
+	int period_num = 4 % NUM_THREADS;
 	int prime = PRIME_5;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -146,7 +146,7 @@ void orbital_period5(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period6(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 6;
+	int period_num = 5 % NUM_THREADS;
 	int prime = PRIME_6;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -165,7 +165,7 @@ void orbital_period6(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period7(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 7;
+	int period_num = 6 % NUM_THREADS;
 	int prime = PRIME_7;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -184,7 +184,7 @@ void orbital_period7(double* inputs, long* answers, long** all_answers)
  */ 
 void orbital_period8(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
+	int period_num = 7 % NUM_THREADS;
 	int prime = PRIME_8;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -200,7 +200,7 @@ void orbital_period8(double* inputs, long* answers, long** all_answers)
 
 void orbital_period9(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
+	int period_num = 8 % NUM_THREADS;
 	int prime = PRIME_8;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
@@ -216,8 +216,8 @@ void orbital_period9(double* inputs, long* answers, long** all_answers)
 
 void orbital_period10(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 9 % NUM_THREADS;
+	int prime = PRIME_9;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -232,8 +232,8 @@ void orbital_period10(double* inputs, long* answers, long** all_answers)
 
 void orbital_period11(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 10 % NUM_THREADS;
+	int prime = PRIME_11;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -248,8 +248,8 @@ void orbital_period11(double* inputs, long* answers, long** all_answers)
 
 void orbital_period12(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 11 % NUM_THREADS;
+	int prime = PRIME_12;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -264,8 +264,8 @@ void orbital_period12(double* inputs, long* answers, long** all_answers)
 
 void orbital_period13(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 12 % NUM_THREADS;
+	int prime = PRIME_13;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -280,8 +280,8 @@ void orbital_period13(double* inputs, long* answers, long** all_answers)
 
 void orbital_period14(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 13 % NUM_THREADS;
+	int prime = PRIME_14;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -296,8 +296,8 @@ void orbital_period14(double* inputs, long* answers, long** all_answers)
 
 void orbital_period15(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 14 % NUM_THREADS;
+	int prime = PRIME_15;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -312,8 +312,8 @@ void orbital_period15(double* inputs, long* answers, long** all_answers)
 
 void orbital_period16(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 15 % NUM_THREADS;
+	int prime = PRIME_16;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -328,8 +328,8 @@ void orbital_period16(double* inputs, long* answers, long** all_answers)
 
 void orbital_period17(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 16 % NUM_THREADS;
+	int prime = PRIME_17;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -344,8 +344,8 @@ void orbital_period17(double* inputs, long* answers, long** all_answers)
 
 void orbital_period18(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 17 % NUM_THREADS;
+	int prime = PRIME_18;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -360,8 +360,8 @@ void orbital_period18(double* inputs, long* answers, long** all_answers)
 
 void orbital_period19(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 18 % NUM_THREADS;
+	int prime = PRIME_19;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -376,8 +376,8 @@ void orbital_period19(double* inputs, long* answers, long** all_answers)
 
 void orbital_period20(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 19 % NUM_THREADS;
+	int prime = PRIME_20;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -392,8 +392,8 @@ void orbital_period20(double* inputs, long* answers, long** all_answers)
 
 void orbital_period21(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 20 % NUM_THREADS;
+	int prime = PRIME_21;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -408,8 +408,8 @@ void orbital_period21(double* inputs, long* answers, long** all_answers)
 
 void orbital_period22(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 21 % NUM_THREADS;
+	int prime = PRIME_22;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -424,8 +424,8 @@ void orbital_period22(double* inputs, long* answers, long** all_answers)
 
 void orbital_period23(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 22 % NUM_THREADS;
+	int prime = PRIME_23;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -440,8 +440,8 @@ void orbital_period23(double* inputs, long* answers, long** all_answers)
 
 void orbital_period24(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 23 % NUM_THREADS;
+	int prime = PRIME_24;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -456,8 +456,8 @@ void orbital_period24(double* inputs, long* answers, long** all_answers)
 
 void orbital_period25(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 24 % NUM_THREADS;
+	int prime = PRIME_25;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -472,8 +472,8 @@ void orbital_period25(double* inputs, long* answers, long** all_answers)
 
 void orbital_period26(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 25 % NUM_THREADS;
+	int prime = PRIME_26;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -488,8 +488,8 @@ void orbital_period26(double* inputs, long* answers, long** all_answers)
 
 void orbital_period27(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 26 % NUM_THREADS;
+	int prime = PRIME_27;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
@@ -504,8 +504,8 @@ void orbital_period27(double* inputs, long* answers, long** all_answers)
 
 void orbital_period28(double* inputs, long* answers, long** all_answers)
 {
-	int period_num = 8;
-	int prime = PRIME_8;
+	int period_num = 27 % NUM_THREADS;
+	int prime = PRIME_28;
 	
     for(int x = 0; x < INPUT_SIZE; x++)
     {   
