@@ -18,7 +18,7 @@ public class Server
   // Singleton
   private static Server server;
   private static final int DEFUALT_PORT = 6559;
-  private static final int TIMEOUT = 5000; //5 sec
+  private static final int TIMEOUT = 15000; //15 sec
   private DatagramSocket socket;
   private DatagramPacket packet;
   private byte[] recvBuffer;

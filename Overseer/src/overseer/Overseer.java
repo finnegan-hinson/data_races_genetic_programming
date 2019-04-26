@@ -28,7 +28,7 @@ public class Overseer
   private static ArrayList<Genome> genomes;
 
   private static final String RUN = "./runner";
-  private static final String CLUSTER_RUN = "sh -ic \"salloc -n 4 /usr/lib64/openmpi/bin/mpirun ./runnsalloc -n 4 /usr/lib64/openmpi/bin/mpirusalloc -n 4 /usr/lib64/openmpi/bin/mpirun ./runnern ./runnerer\"";
+  private static final String CLUSTER_RUN = "sh ./run_comp.sh";
 
   // Master switch for the population size, change here
   public static final int POPULATION_SIZE = 28;
@@ -113,6 +113,8 @@ public class Overseer
       {
         points = msg.getPoints();
 
+        System.out.println("Points: " + Arrays.toString(points));
+        
         System.out.println("Itteration[" + x + "] Execution Time(ms):\t" + msg.getRuntime());
         
         // Determine the fitness of the population run

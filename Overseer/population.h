@@ -46,16 +46,18 @@ void orbital_period1(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
-        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
+       count += 17;
 
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
         count = 0;
         count = 2.000001 * 20000000000;
-
-        answers[x] = 42 * prime;
-        all_answers[period_num][x] = 42;
-
-        //Something was here, but he is dead now.
 
     }}
 
@@ -74,15 +76,18 @@ void orbital_period2(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-       // nothing 
-        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
-        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
+      count = 0;
+      count = 2.000001 / 20000000000;
 
-        count = rand();
+        count = 0;
+        count = 2.000001 * 20000000000;
 
-        answers[x] = (roundl((2 * M_PI) * sin(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sin(to_root));
+       count += 17;
 
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
     }
 }
 
@@ -101,17 +106,17 @@ void orbital_period3(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
 		
-      count = 0;
-        for (int i = 0; i < 100; i++) {
-            count += i;
-         }
+        answers[x] = 42 * prime;
+        all_answers[period_num][x] = 42;
+
+        answers[x] = 42 * prime;
+        all_answers[period_num][x] = 42;
+
         answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
         all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
 
-       count += 17;
-
-        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
+        count = 0;
+        count = 2.000001 * 20000000000;
 
     }
 }
@@ -131,15 +136,17 @@ void orbital_period4(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-      count = 0;
-      count = 2.000001 * 20000000000 / 15.00000 + 7.1234;
-
-        //Something was here, but he is dead now.
-
-        //Something was here, but he is dead now.
+        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
+        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
 
         count = 0;
         count = 2.000001 * 20000000000;
+
+        count = 0;
+        count = 2.000001 * 20000000000;
+
+        answers[x] = (roundl((2 * M_PI) * cos(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * cos(to_root));
 
 		
     }
@@ -160,20 +167,17 @@ void orbital_period5(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
+        answers[x] = (roundl((2 * M_PI) * sin(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * sin(to_root));
 
-        count = 0;
-          for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-              count += i + j;
-            }
-          }
+        answers[x] = (roundl((2 * M_PI) * sin(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * sin(to_root));
+
       count = 0;
-      count = 2.000001 / 20000000000;
+      count = 2.000001 * 20000000000 / 15.00000 + 7.1234;
 
-        answers[x] = (roundl((2 * M_PI) * cos(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * cos(to_root));
+        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
+        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
 
     }
 }
@@ -193,23 +197,19 @@ void orbital_period6(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-       count += 17;
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
+        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
 
-        count = 0;
-          for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-              count += i + j;
-            }
-          }
-        answers[x] = 42 * prime;
-        all_answers[period_num][x] = 42;
+        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
 
-        count = 0;
-          for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-              count += i + j;
-            }
-          }
+      count = 0;
+      count = 2.000001 * 20000000000 / 15.00000 + 7.1234;
+
     }
 }
 
@@ -228,21 +228,16 @@ void orbital_period7(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
-
       count = 0;
       count = 2.000001 / 20000000000;
 
         count = 0;
         count = 2.000001 * 20000000000;
 
-        count = 0;
-          for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-              count += i + j;
-            }
-          }
+        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
+        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
+
+       // nothing 
     }
 }
 
@@ -261,17 +256,19 @@ void orbital_period8(double* inputs, long* answers, long** all_answers)
         
         to_root = a / EARTH_SPG;
         
-        answers[x] = (roundl((2 * M_PI) * cos(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * cos(to_root));
-
-        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
-
         answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
         all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
 
-        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
+        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
+        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
 
     }
 }
@@ -285,15 +282,18 @@ void orbital_period_cannon(double* inputs, long* answers)
         
         to_root = a / EARTH_SPG;
         
+      count = 0;
+        for (int i = 0; i < 100; i++) {
+            count += i;
+         }
+      count = 0;
+      count = 2.000001 * 20000000000 / 15.00000 + 7.1234;
+
         answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
         all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
 
-        answers[x] = (roundl((16 * M_PI) * sqrt(to_root)))* prime;
-        all_answers[period_num][x] = roundl((16 * M_PI) * sqrt(to_root));
-
-       // nothing 
-        answers[x] = (roundl((2 * M_PI) * sin(to_root))) * prime;
-        all_answers[period_num][x] = roundl((2 * M_PI) * sin(to_root));
+        answers[x] = (roundl((2 * M_PI) * sqrt(to_root))) * prime;
+        all_answers[period_num][x] = roundl((2 * M_PI) * sqrt(to_root));
 
     }
 }

@@ -1,6 +1,21 @@
+/*
+ * This is used to generate (if base_population.h) or run (if population.h)
+ * compititions between threads to generate point values representing a given
+ * genomes fitness in this context.
+ * 
+ * In the current compitition, each thread will write to a shared resource and
+ * to its own address within a two demensional array.
+ * 
+ * NOTE: The Java snippet writer uses the insert tags to locate locations in the
+ * code where snippets are to be written.
+ * 
+ * Authors: Sean Dwyer and Virgina Hinson.
+ * 
+ */
+
 #define EARTH_SPG 398600441800000
 
-#define INPUT_SIZE 1000
+#define INPUT_SIZE 10000
 #define NUM_THREADS 7 //Max threads on a cluster -1.
 #define NODES 4 //Number of nodes for the program to be run on.
 
@@ -46,9 +61,9 @@
 #define PRIME_28 241
 
 
-/*
- * Incorrect LAZZZZY Boi
- */ 
+//BEGIN Generated_Functions
+
+//Genome 1
 void orbital_period1(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 0 % NUM_THREADS;
@@ -62,11 +77,10 @@ void orbital_period1(double* inputs, long* answers, long** all_answers)
         to_root = a / EARTH_SPG;
         
         // Insert
-    }}
+    }
+}
 
-/*
- * Incorrect Boi
- */ 
+//Genome 2
 void orbital_period2(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 1 % NUM_THREADS;
@@ -83,9 +97,7 @@ void orbital_period2(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Incorrect Boi
- */ 
+//Genome 3
 void orbital_period3(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 2 % NUM_THREADS;
@@ -102,9 +114,7 @@ void orbital_period3(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Correct simple boi.
- */  
+//Genome 4
 void orbital_period4(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 3 % NUM_THREADS;
@@ -122,9 +132,7 @@ void orbital_period4(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Incorrect Boi
- */ 
+//Genome 5
 void orbital_period5(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 4 % NUM_THREADS;
@@ -141,9 +149,7 @@ void orbital_period5(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Incorrect Boi
- */ 
+//Genome 6
 void orbital_period6(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 5 % NUM_THREADS;
@@ -160,9 +166,7 @@ void orbital_period6(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Correct and slow Boi
- */ 
+//Genome 7
 void orbital_period7(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 6 % NUM_THREADS;
@@ -179,9 +183,7 @@ void orbital_period7(double* inputs, long* answers, long** all_answers)
     }
 }
 
-/*
- * Incorrect Boi
- */ 
+//Genome 8
 void orbital_period8(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 7 % NUM_THREADS;
@@ -198,6 +200,7 @@ void orbital_period8(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 9
 void orbital_period9(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 8 % NUM_THREADS;
@@ -214,6 +217,7 @@ void orbital_period9(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 10
 void orbital_period10(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 9 % NUM_THREADS;
@@ -230,6 +234,7 @@ void orbital_period10(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 11
 void orbital_period11(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 10 % NUM_THREADS;
@@ -246,6 +251,7 @@ void orbital_period11(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 12
 void orbital_period12(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 11 % NUM_THREADS;
@@ -262,6 +268,7 @@ void orbital_period12(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 13
 void orbital_period13(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 12 % NUM_THREADS;
@@ -278,6 +285,7 @@ void orbital_period13(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 14
 void orbital_period14(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 13 % NUM_THREADS;
@@ -294,6 +302,7 @@ void orbital_period14(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 15
 void orbital_period15(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 14 % NUM_THREADS;
@@ -310,6 +319,7 @@ void orbital_period15(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 16
 void orbital_period16(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 15 % NUM_THREADS;
@@ -326,6 +336,7 @@ void orbital_period16(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 17
 void orbital_period17(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 16 % NUM_THREADS;
@@ -342,6 +353,7 @@ void orbital_period17(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 18
 void orbital_period18(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 17 % NUM_THREADS;
@@ -358,6 +370,7 @@ void orbital_period18(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 19
 void orbital_period19(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 18 % NUM_THREADS;
@@ -374,6 +387,7 @@ void orbital_period19(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 20
 void orbital_period20(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 19 % NUM_THREADS;
@@ -390,6 +404,7 @@ void orbital_period20(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 21
 void orbital_period21(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 20 % NUM_THREADS;
@@ -406,6 +421,7 @@ void orbital_period21(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 22
 void orbital_period22(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 21 % NUM_THREADS;
@@ -422,6 +438,7 @@ void orbital_period22(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 23
 void orbital_period23(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 22 % NUM_THREADS;
@@ -438,6 +455,7 @@ void orbital_period23(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 24
 void orbital_period24(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 23 % NUM_THREADS;
@@ -454,6 +472,7 @@ void orbital_period24(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 25
 void orbital_period25(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 24 % NUM_THREADS;
@@ -470,6 +489,7 @@ void orbital_period25(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 26
 void orbital_period26(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 25 % NUM_THREADS;
@@ -486,6 +506,7 @@ void orbital_period26(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 27
 void orbital_period27(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 26 % NUM_THREADS;
@@ -502,6 +523,7 @@ void orbital_period27(double* inputs, long* answers, long** all_answers)
     }
 }
 
+//Genome 28
 void orbital_period28(double* inputs, long* answers, long** all_answers)
 {
 	int period_num = 27 % NUM_THREADS;
@@ -517,9 +539,11 @@ void orbital_period28(double* inputs, long* answers, long** all_answers)
         // Insert
     }
 }
+//END Generated_Functions
 
 /*
  * This generates the correct answer. Do not modify
+ * with a incubator.
  */
 void orbital_period_cannon(double* inputs, long* answers)
 {
@@ -538,7 +562,7 @@ void orbital_period_cannon(double* inputs, long* answers)
  * Calculate the orbital periods of the given satelites (assuming Earth SOI and no other bodies)
  * see [https://en.wikipedia.org/wiki/Orbital_mechanics#Orbital_period]
  * 
- * (Run this guy)
+ * Call this function from outside of population.
  */ 
 void orbital_period(double* inputs, long* answers, long** all_answers, int thread)
 {
