@@ -35,10 +35,8 @@ public class Incubator {
 	private static Genome[] crossover(Genome first, Genome second) {
 		Genome[] recombined = new Genome[2];
 
-		Random random = new Random();
-
 		// The crossover is chosen at random instead of just the halfway point
-		int crossoverPoint = random.nextInt(3) + 1; // 1 - 3
+		int crossoverPoint = (int) Math.random() * 3 + 1; // 1 - 3
 
 		// For each of the recombination points, the new genome is determined
 		switch (crossoverPoint) {
@@ -66,8 +64,8 @@ public class Incubator {
 		}
 
 		// The new Genomes may get mutated at the mutation rate (for both Genomes)
-		if (random.nextDouble() < MUTATION_RATE * 2) {
-			if (random.nextBoolean()) {
+		if (Math.random() < MUTATION_RATE * 2) {
+			if (Math.random() > 0.5) {
 				recombined[0] = mutation(recombined[0]);
 
 			} else {
@@ -89,10 +87,8 @@ public class Incubator {
 	 */
 	public static Genome mutation(Genome toMutate) {
 
-		Random random = new Random();
-
 		// 1 - 4, the snippet to be changed
-		int snippetToMutate = random.nextInt(4) + 1;
+		int snippetToMutate = (int) Math.random() * 4 + 1;
 		// A random Snippet from the list is chosen, with 0 representing nothing
 		int randomSnippet = Snippet.getRandomSnippetNumber();
 
