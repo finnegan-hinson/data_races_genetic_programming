@@ -12,7 +12,7 @@
 *The program will automatically compile C code on each iteration, simple assure that the setup is followed.
 
 ### Running
-*Command on the cluster: "srun java -jar ./Overseer.jar [#itterations] y"
+*Command on the cluster: "srun java -jar ./Overseer.jar [#iterations] y"
 
 *The output to the console is the itteration that the process is currently on and the total runtime of the
     compitition. Note that the average time will steadaly increace as the programs evolve.
@@ -44,7 +44,7 @@ NOTE: This will be automatically done when the Overseer is run.
 
 *Overseer.jar - Precompiled executable jar folder.
 
-*run_comp.sh - Runs a single itteration of the compitition C code on 4 nodes.
+*run_comp.sh - Runs a single iteration of the compitition C code on 4 nodes.
 
 *runner.c - C source file for the compitition runner.
 
