@@ -134,6 +134,7 @@ public class Population {
 				this.fittest = i;
 			}
 
+
 			copyFitness[i] = fitnessFigures[i];
 		}
 

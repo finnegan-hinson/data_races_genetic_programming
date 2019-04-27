@@ -24,7 +24,7 @@ public class Genome {
 	private int id;
 
 	int[] parentID = new int[2];
-
+  
 	/**
 	 * The constructor for Genomes.
 	 * 
@@ -48,8 +48,8 @@ public class Genome {
 		} else {
 			parentID[0] = father.getID();
 		}
-
-		if (mother == null) {
+    
+    if (mother == null) {
 			parentID[1] = -1;
 		} else {
 			parentID[1] = mother.getID();
@@ -70,7 +70,7 @@ public class Genome {
 
 	}
 
-	/**
+  /**
 	 * "Getter" for the first snippet.
 	 * 
 	 * @return the first snippet number
@@ -79,7 +79,7 @@ public class Genome {
 		return this.first;
 	}
 
-	/**
+  /**
 	 * "Getter" for the second snippet.
 	 * 
 	 * @return the second snippet number
@@ -88,7 +88,7 @@ public class Genome {
 		return this.second;
 	}
 
-	/**
+  /**
 	 * "Getter" for the third snippet.
 	 * 
 	 * @return the third snippet number
@@ -97,7 +97,7 @@ public class Genome {
 		return this.third;
 	}
 
-	/**
+  /**
 	 * "Getter" for the fourth snippet.
 	 * 
 	 * @return the fourth snippet number
@@ -106,16 +106,16 @@ public class Genome {
 		return this.fourth;
 	}
 
-	/**
+  /**
 	 * Returns the size of the genomes.
 	 * 
 	 * @return the genome size
 	 */
 	public static int genomeSize() {
 		return 4;
-	}
-
-	/**
+  }
+  
+  /**
 	 * Returns the unique ID for this genome.
 	 * 
 	 * @return the integer id for this genome
@@ -123,8 +123,8 @@ public class Genome {
 	public int getID() {
 		return id;
 	}
-
-	/**
+  
+  /**
 	 * Returns an array of IDs from both genomes that recombined to create the
 	 * current one.
 	 * 

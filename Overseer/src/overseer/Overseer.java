@@ -35,7 +35,7 @@ public class Overseer
 
   /**
    * Accepts two arguments, the number of iterations and any second argument denoting that the
-   * program is running on the JMU CS cluster.
+   * program is running on the JMU cluster.
    * 
    * @param args
    *          the number of iterations and a second argument to indicate if it is running on the
@@ -49,8 +49,10 @@ public class Overseer
 
     genomes = new ArrayList<Genome>();
     Server server = null;
-
-    if (args.length > 2 || args.length < 1)
+    
+    genomes = new ArrayList<Genome>();
+    
+    if(args.length > 2 || args.length < 1)
     {
       System.out.println("Invalid argument count");
       return;
@@ -70,6 +72,7 @@ public class Overseer
     runString = RUN;
     // If any command line argument is given to indicate it is run on the cluster
     if (args.length == 3)
+
     {
       runString = CLUSTER_RUN;
     }
@@ -80,7 +83,6 @@ public class Overseer
 
     for (int x = 0; x < iterations; x++)
     {
-
       // A list of all genomes for tracking
       genomes.addAll(population.getGenomes());
 
