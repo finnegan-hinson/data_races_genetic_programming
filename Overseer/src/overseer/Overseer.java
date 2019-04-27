@@ -47,7 +47,6 @@ public class Overseer
     int[] points;
     Message msg;
 
-    genomes = new ArrayList<Genome>();
     Server server = null;
     
     genomes = new ArrayList<Genome>();
