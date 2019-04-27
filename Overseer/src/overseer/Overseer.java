@@ -12,29 +12,42 @@ import incubator.Population;
 import server.Message;
 import server.Server;
 
+/**
+ * This class oversees the generation of new populations and the execution of said population's
+ * resulting c file.
+ * 
+ * In other words, it is the main delegator for the functionality of the project.
+ * 
+ * @author Virginia Hinson and Sean Dwyer
+ *
+ */
 public class Overseer
 {
-  private static boolean cluster;
-  private static int port;
+
   private static String runString;
-  private static ArrayList<Genome> genomes; 
+  private static ArrayList<Genome> genomes;
+
   private static final String RUN = "./runner";
-  private static final String CLUSTER_RUN = "srun ./runner";
+  private static final String CLUSTER_RUN = "sh ./run_comp.sh";
+
+  // Master switch for the population size, change here
+  public static final int POPULATION_SIZE = 28;
 
   /**
    * Accepts two arguments, the number of iterations and any second argument denoting that the
    * program is running on the JMU cluster.
    * 
    * @param args
+   *          the number of iterations and a second argument to indicate if it is running on the
+   *          cluster
    */
   public static void main(String[] args)
   {
-    int itt;
-    
+    int iterations;
     int[] points;
-    
     Message msg;
-    
+
+    genomes = new ArrayList<Genome>();
     Server server = null;
     
     genomes = new ArrayList<Genome>();
@@ -44,34 +57,39 @@ public class Overseer
       System.out.println("Invalid argument count");
       return;
     }
-    try {
-      itt = Integer.parseInt(args[0]);
+    try
+    {
+      iterations = Integer.parseInt(args[0]);
     }
-    catch(NumberFormatException e)
+    catch (NumberFormatException e)
     {
       System.out.println("The 1st parameter must be an integer");
       return;
     }
-    
-    runString = RUN;
-    
+
     server = Server.initServer();
-        
-    if(args.length == 3)
+
+    runString = RUN;
+    // If any command line argument is given to indicate it is run on the cluster
+    if (args.length == 3)
+
     {
       runString = CLUSTER_RUN;
     }
-    
-    Population population = new Population(7);
-    
+
+    Population population = new Population(POPULATION_SIZE);
+
     String homeDirectory = System.getProperty("user.dir");
-    
-    for(int x = 0; x < itt; x++)
+
+    for (int x = 0; x < iterations; x++)
     {
+      // A list of all genomes for tracking
       genomes.addAll(population.getGenomes());
+
+      // Writes the population's genome snippets to a C file
       GenomeWriter writer = new GenomeWriter(population, homeDirectory + "/base_population.h",
-                                              homeDirectory + "/population.h", "// Insert");
-      
+          homeDirectory + "/population.h", "// Insert");
+
       try
       {
         writer.writePopulation();
@@ -80,29 +98,28 @@ public class Overseer
       {
         e.printStackTrace();
       }
-      
+
       makeAndRun();
       msg = null;
-      
-      try 
+
+      // If the socket times out, try once more
+      try
       {
         msg = server.recvMessage();
       }
-      catch(SocketTimeoutException e)
+      catch (SocketTimeoutException e)
       {
         x--;
       }
-      if(msg != null)
+      if (msg != null)
       {
         points = msg.getPoints();
-      
-        //TODO Remove debug statement.
-        System.out.println("***Itteration " + x+"***");
-        System.out.println("Points: \t\t\t" + Arrays.toString(points));
-        System.out.println("Total Execution Time(ms):\t" + msg.getRuntime());
         
+        System.out.println("Itteration[" + x + "] Execution Time(ms):\t" + msg.getRuntime());
+        
+        // Determine the fitness of the population run
         population.determineFitness(points);
-        
+        // Using this data, generate the next generation
         Incubator.nextGeneration(population);
       }
       else
@@ -111,34 +128,19 @@ public class Overseer
       }
     }
   }
-  
+
+  /**
+   * Runs the makefile and the generated C program.
+   */
   private static void makeAndRun()
   {
     try
     {
-      Runtime.getRuntime().exec("make clean").waitFor();
-      Runtime.getRuntime().exec("make").waitFor();
+      Runtime.getRuntime().exec("sh ./build_c.sh").waitFor();
       Runtime.getRuntime().exec(runString);
     }
     catch (InterruptedException | IOException e)
     {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      System.exit(1);
-    }
-  }
-  
-  private static void makeAndRunIDE()
-  {
-    try
-    {
-      Runtime.getRuntime().exec("make --directory=../ clean").waitFor();
-      Runtime.getRuntime().exec("make --directory=../").waitFor();
-      Runtime.getRuntime().exec("../runner");
-    }
-    catch (InterruptedException | IOException e)
-    {
-      // TODO Auto-generated catch block
       e.printStackTrace();
       System.exit(1);
     }
