@@ -112,8 +112,6 @@ public class Overseer
       if (msg != null)
       {
         points = msg.getPoints();
-
-        System.out.println("Points: " + Arrays.toString(points));
         
         System.out.println("Itteration[" + x + "] Execution Time(ms):\t" + msg.getRuntime());
         

@@ -35,7 +35,7 @@ public class Server
   /**
    * Receive a message from the master competition process.
    * 
-   * @return
+   * @return The message from the C process.
    * @throws SocketTimeoutException
    */
   public Message recvMessage() throws SocketTimeoutException
@@ -99,7 +99,7 @@ public class Server
    * 
    * @param port - the port to be bound.
    * 
-   * @throws SocketException - Thrown if a networking area has occured.
+   * @throws SocketException - Thrown if a networking area has occurred.
    */
   private Server(int port) throws SocketException
   {
@@ -112,7 +112,7 @@ public class Server
   /**
    * Read the second integer in the datagram packet representing the amount of time it took for the compition to finish.
    * 
-   * NOTE: This function assumes little Indian.
+   * NOTE: This function assumes little endian format.
    * 
    * @param in - The byte array from the datagram packet.
    * @return The time (in milliseconds) that it took for the competition to complete.
